@@ -4,7 +4,7 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-let User = require("../model/User");
+let User = require("../model/user");
 let isLoggedIn = require("../config/config");
 
 router.get("/", (req, res) => {
@@ -75,12 +75,11 @@ router.post("/change", isLoggedIn, async (req, res) => {
     let { username, image } = req.body;
 
     let user = await User.findByIdAndUpdate(req.user._id, {
-      $set: { username: username, image: image }
+      $set: { username: username, image: image },
     });
 
-    user = await User.findById(req.user._id, "-password")
+    user = await User.findById(req.user._id, "-password");
     res.status(200).json({ user, message: "Updated !!" });
-
   } catch (error) {
     res.status(500).json(error);
   }
@@ -144,7 +143,6 @@ router.get("/user", isLoggedIn, async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "something went wrong!" });
   }
-  
 });
 
 module.exports = router;

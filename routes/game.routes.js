@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-let User = require("../model/User");
+let User = require("../model/user");
 let isLoggedIn = require("../config/config");
 
 router.post("/addScore", isLoggedIn, async (req, res) => {
