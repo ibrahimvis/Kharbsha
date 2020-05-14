@@ -347,7 +347,9 @@ export default class Game extends Component {
 
       // stop draw() from looping
       p.noLoop();
-      setTimeout(startRound, 5000);
+      if (host === player) {
+        setTimeout(startRound, 5000);
+      }
       function sendToChat() {
         let msg = chatInp.value();
         if (msg != "") {
